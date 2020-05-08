@@ -1,7 +1,7 @@
 <template>
   <div>
-    <p> {{ marker_data.address }} </p>
-    <button @click=""> View </button>
+    <p>{{marker_data.id}} - {{marker_data.address}} </p>
+    <button id="btn">Click</button>
   </div>
 </template>
 
@@ -15,8 +15,6 @@ export default {
         return {}
       },
     }
-  },
-  methods: {
   },
 }
 </script>

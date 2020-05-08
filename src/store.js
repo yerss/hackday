@@ -10,11 +10,15 @@ export default new Vuex.Store({
     barColor: 'rgba(0, 0, 0, .8), rgba(0, 0, 0, .8)',
     barImage: 'https://demos.creative-tim.com/material-dashboard/assets/img/sidebar-1.jpg',
     drawer: null,
-    houses: []
+    houses: [],
+    house: {},
   },
   getters: {
     HOUSES (state) {
       return state.houses
+    },
+    HOUSE (state) {
+      return state.house
     }
   },
   mutations: {
@@ -26,22 +30,22 @@ export default new Vuex.Store({
     },
     SET_HOUSES (state, data) {
       state.houses = data
-    }
+    },
+    SET_HOUSE (state, data) {
+      state.house = data
+    },
   },
   actions: {
     GET_HOUSES ({commit}) {
-      return axios.get(`/houses`, {
-        mode: 'no-cors',
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json',
-        },
-        withCredentials: true,
-        credentials: 'same-origin',
-      })
+      return axios.get(`/houses`)
         .then((response) => {
-          console.log(response)
-          commit('SET_BRANDS', response)
+          commit('SET_HOUSES', response.data)
+        })
+    },
+    GET_HOUSE ({commit}, id) {
+      return axios.get(`/houses/${id}`)
+        .then((response) => {
+          commit('SET_HOUSE', response.data)
         })
     }
   },
